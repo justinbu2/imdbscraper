@@ -15,6 +15,7 @@ def get_cast(movie_id):
         actor_itemprop = actor.find("td", class_="itemprop")
         actor_itemprop_child = actor.find("a", href=True)
         actor_info["site_path"] = actor_itemprop_child['href']
+        actor_info["id"] = extract_actor_id(actor_info["site_path"])
         actor_info["name"] = actor_itemprop.span.text
         actor_character = actor.find("td", class_="character").div
         characters = [x.text for x in actor_character.find_all("a")]
@@ -24,3 +25,7 @@ def get_cast(movie_id):
         actor_info["characters"] = characters
         cast.append(actor_info)
     return cast
+
+
+def extract_actor_id(site_path):
+    return site_path.split('/')[2]

@@ -100,6 +100,9 @@ ENV/
 # mypy
 .mypy_cache/
 
+# Mac OS cache
+.DS_Store
+
 # Editor files
 *~
 *.sw?
