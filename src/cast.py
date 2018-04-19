@@ -1,0 +1,26 @@
+from . import util
+from .constants import SAMPLE_OUTPUT_DIR
+
+
+# Given a soup
+def get_cast(movie_id):
+    soup = util.lookup(movie_id, f"/title/{movie_id}/fullcredits")
+
+    # plan to return list of {name: NAME, character: NAME, page: LINK} dicts
+    cast = []
+    cast_tag = soup.find("table", "cast_list") # type bs4.element.Tag
+    actors = cast_tag.find_all("tr", ["odd", "even"])
+    for actor in actors:
+        actor_info = {}
+        actor_itemprop = actor.find("td", class_="itemprop")
+        actor_itemprop_child = actor.find("a", href=True)
+        actor_info["site_path"] = actor_itemprop_child['href']
+        actor_info["name"] = actor_itemprop.span.text
+        actor_character = actor.find("td", class_="character").div
+        characters = [x.text for x in actor_character.find_all("a")]
+        aux_character = ' '.join(actor_character.text.split())
+        if aux_character and aux_character not in characters:
+            characters.append(aux_character)
+        actor_info["characters"] = characters
+        cast.append(actor_info)
+    return cast
