@@ -14,10 +14,9 @@ def get_movies(actor_data):
         movie = movie_info.b.find("a", href=True)
         movies_list.append({
             "id": extract_movie_id(movie["href"]),
-            "name": movie.text,
+            "name": movie.text.strip(),
             "site_path": movie["href"]
         })
-        print(movies_list[-1]["id"])
     return movies_list
 
 
