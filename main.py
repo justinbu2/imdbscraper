@@ -32,14 +32,14 @@ def main():
         if movie_id == args.title or len(movie["mutual_actors"]) == 1:
             continue
         output_movies.append({
-            "name": movie["name"],
+            "feature_name": movie["name"],
             "mutual_actors": movie["mutual_actors"]
         })
 
     # Output movies in descending order of mutual actor count
     output_movies = sorted(output_movies, key=lambda x: -len(x["mutual_actors"]))
     with open(f"{constants.SAMPLE_OUTPUT_DIR}/{args.title}-mutual-movies.json", 'w') as f:
-        json.dump(output_movies, f)
+        json.dump(output_movies, f, indent=2)
 
 
 if __name__ == "__main__":

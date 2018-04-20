@@ -1,11 +1,13 @@
 # imdbscraper
-Generic scraper that takes in the IMDB ID of a movie/show and writes to a JSON file all features that involve two or more of the same cast members of the given IMDB ID.
+Generic scraper that takes in the IMDB ID of a movie and writes to a JSON file all features that involve two or more of the same cast members of the given IMDB ID.
+
 
 # Usage
 ```
 ./main.py -t TITLE
 ```
-where TITLE is the IMDB ID of a movie, e.g. tt1677720 for _Ready Player One_.
+where TITLE is the IMDB ID of a movie, e.g. `tt1677720` for _Ready Player One_.
+
 
 # Output
 Output will be in `output/`. Files created there will have a filename of the form `TitleID-mutual-movies.json`. A sample output from _Ready Player One_ can be found [here](output/sample-rpo-mutual-movies.json).
