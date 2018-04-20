@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import argparse
 import collections
 import json
@@ -36,7 +38,7 @@ def main():
 
     # Output movies in descending order of mutual actor count
     output_movies = sorted(output_movies, key=lambda x: -len(x["mutual_actors"]))
-    with open(f"{constants.SAMPLE_OUTPUT_DIR}/mutual-movies.json", 'w') as f:
+    with open(f"{constants.SAMPLE_OUTPUT_DIR}/{args.title}-mutual-movies.json", 'w') as f:
         json.dump(output_movies, f)
 
 
