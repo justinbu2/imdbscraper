@@ -110,4 +110,4 @@ ENV/
 
 # Sample output
 cached-sites/
-dummy-output/
+sample-output/sample-rpo-mutual-movies.json
