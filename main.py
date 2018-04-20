@@ -17,7 +17,7 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
-    print("Starting script...")
+    print("Starting up...")
     cast_data = cast.get_cast(args.title)
     mutual_movies = collections.defaultdict(dict)
     for actor_data in cast_data:
