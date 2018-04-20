@@ -17,6 +17,7 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
+    print("Starting script...")
     cast_data = cast.get_cast(args.title)
     mutual_movies = collections.defaultdict(dict)
     for actor_data in cast_data:
@@ -39,6 +40,7 @@ def main():
     # Output movies in descending order of mutual actor count
     output_movies = sorted(output_movies, key=lambda x: -len(x["mutual_actors"]))
     with open(f"{constants.SAMPLE_OUTPUT_DIR}/{args.title}-mutual-movies.json", 'w') as f:
+        print("Outputting results...")
         json.dump(output_movies, f, indent=2)
 
 
