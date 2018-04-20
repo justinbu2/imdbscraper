@@ -3,15 +3,15 @@ from .constants import SAMPLE_OUTPUT_DIR
 
 
 # Given a soup
-def get_cast(movie_id):
-    print(f"Getting cast info for movie id {movie_id}...")
-    soup = util.lookup(movie_id, f"/title/{movie_id}/fullcredits")
+def get_cast(title_id):
+    print(f"Getting cast info for IMDB title id {title_id}...")
+    soup = util.lookup(title_id, f"/title/{title_id}/fullcredits")
 
     # plan to return list of {name: NAME, character: NAME, page: LINK} dicts
     cast = []
     cast_tag = soup.find("table", "cast_list") # type bs4.element.Tag
     actors = cast_tag.find_all("tr", ["odd", "even"])
-    for i, actor in enumerate(actors):
+    for actor in actors:
         actor_info = {}
         actor_itemprop = actor.find("td", class_="itemprop")
         actor_itemprop_child = actor.find("a", href=True)
@@ -25,8 +25,7 @@ def get_cast(movie_id):
             characters.append(aux_character)
         actor_info["characters"] = characters
         cast.append(actor_info)
-        print(f"Fetched {i + 1} of {len(actors)} actors for movie id {movie_id}", end='\r')
-    print(f"\nSuccessfully fetched all actors for movie id {movie_id}")
+    print(f"Successfully fetched all actors for IMDB title id {title_id}.")
     return cast
 
 

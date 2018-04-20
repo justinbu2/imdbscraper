@@ -21,7 +21,7 @@ def main():
     cast_data = cast.get_cast(args.title)
     mutual_movies = collections.defaultdict(dict)
     for actor_data in cast_data:
-        movies_list = movies.get_movies(actor_data)
+        movies_list = movies.get_features(actor_data)
         for movie in movies_list:
             if movie["id"] not in mutual_movies:
                 mutual_movies[movie["id"]]["name"] = movie["name"]
@@ -39,8 +39,9 @@ def main():
 
     # Output movies in descending order of mutual actor count
     output_movies = sorted(output_movies, key=lambda x: -len(x["mutual_actors"]))
-    with open(f"{constants.SAMPLE_OUTPUT_DIR}/{args.title}-mutual-movies.json", 'w') as f:
-        print("Outputting results...")
+    output_filepath = f"{constants.SAMPLE_OUTPUT_DIR}/{args.title}-mutual-movies.json"
+    with open(output_filepath, 'w') as f:
+        print(f"\nOutputting results to {output_filepath}")
         json.dump(output_movies, f, indent=2)
 
 
