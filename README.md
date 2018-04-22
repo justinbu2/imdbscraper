@@ -3,6 +3,7 @@ Generic scraper that takes in the IMDB ID of a movie and writes to a JSON file a
 
 
 # Usage
+First, install the Python 3 packages listed in `requirements.txt`.
 ```
 ./main.py -t TITLE
 ```
@@ -10,7 +11,7 @@ where TITLE is the IMDB ID of a movie, e.g. `tt1677720` for _Ready Player One_.
 
 
 # Output
-Output will be in `output/`. Files created there will have a filename of the form `TitleID-mutual-movies.json`. A sample output from _Ready Player One_ can be found [here](output/sample-rpo-mutual-movies.json).
+Output will be in `output/`. Files created there will have a filename of the form `TitleID-mutual-movies.json`. Movies will be ordered in descending order of number of mutual actors with the input movie. A sample output from _Ready Player One_ can be found [here](output/sample-rpo-mutual-movies.json).
 
 
 # Implementation details

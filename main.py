@@ -26,7 +26,7 @@ def main():
     # 2. parsing the data and extracting the actors from those movies
     pool = mp.Pool(processes=4)
     mutual_movies = collections.defaultdict(dict)
-    cast_movies = pool.map(movies.get_movies, cast_data) # list of all movies each cast has been in
+    cast_movies = pool.map(movies.get_features, cast_data) # list of all movies each cast has been in
     for actor_data, actor_movies in zip(cast_data, cast_movies):
         for movie in actor_movies:
             movie_id = movie["id"]
@@ -46,8 +46,9 @@ def main():
 
     # Output movies in descending order of mutual actor count
     output_movies = sorted(output_movies, key=lambda x: -len(x["mutual_actors"]))
-    with open(f"{constants.SAMPLE_OUTPUT_DIR}/{args.title}-mutual-movies.json", 'w') as f:
-        print("Outputting results...")
+    output_filepath = f"{constants.SAMPLE_OUTPUT_DIR}/{args.title}-mutual-movies.json"
+    with open(output_filepath, 'w') as f:
+        print(f"\nOutputting results to {output_filepath}")
         json.dump(output_movies, f, indent=2)
 
 
