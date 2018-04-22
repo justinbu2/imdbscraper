@@ -108,6 +108,5 @@ ENV/
 *.sw?
 .vscode/
 
-# Sample output
+# Site HTTP cache
 cached-sites/
-sample-output/sample-rpo-mutual-movies.json

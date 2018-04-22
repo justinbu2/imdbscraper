@@ -3,6 +3,7 @@
 import argparse
 import collections
 import json
+import multiprocessing as mp
 
 from src import cast, movies, constants
 
@@ -19,14 +20,20 @@ def main():
     args = parse_arguments()
     print("Starting up...")
     cast_data = cast.get_cast(args.title)
+
+    # Parallelizable tasks:
+    # 1. making the request to fetch the data from FS or HTTP
+    # 2. parsing the data and extracting the actors from those movies
+    pool = mp.Pool(processes=4)
     mutual_movies = collections.defaultdict(dict)
-    for actor_data in cast_data:
-        movies_list = movies.get_movies(actor_data)
-        for movie in movies_list:
-            if movie["id"] not in mutual_movies:
-                mutual_movies[movie["id"]]["name"] = movie["name"]
-                mutual_movies[movie["id"]]["mutual_actors"] = []
-            mutual_movies[movie["id"]]["mutual_actors"].append(actor_data["name"])
+    cast_movies = pool.map(movies.get_movies, cast_data) # list of all movies each cast has been in
+    for actor_data, actor_movies in zip(cast_data, cast_movies):
+        for movie in actor_movies:
+            movie_id = movie["id"]
+            if movie_id not in mutual_movies:
+                mutual_movies[movie_id]["name"] = movie["name"]
+                mutual_movies[movie_id]["mutual_actors"] = []
+            mutual_movies[movie_id]["mutual_actors"].append(actor_data["name"])
 
     output_movies = []
     for movie_id, movie in mutual_movies.items():
