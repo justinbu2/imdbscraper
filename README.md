@@ -21,4 +21,4 @@ If a movie does not exist in `cached-sites`, the scraper would fetch the HTML us
 
 This web scraper implements multiprocessing. The parameter can be tuned in the `src/constants.py` file. The only section of the code that is parallelized is that which fetches all the movies for every cast member in the input movie. From my testing, a ~9x speedup over the single-threaded program was observed when HTMLs were fetched from the web, and a 3-4x speedup was observed when all the needed HTMLs were already cached on the file system.
 
-The default configuration specifies 4 parallel processes, but the optimal number may vary based on your machine's architecture.
+The default configuration specifies 4 parallel processes, but the optimal number depends on several parameters, such as your machine's architecture, web connectivity/bandwidth, the average number of movies in which the actors of your input movie acted, and whether the HTML pages of interest are cached.
