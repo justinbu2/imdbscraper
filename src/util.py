@@ -10,7 +10,7 @@ def dump(soup, filepath):
         f.write(soup.prettify())
 
 
-# Unique id for a site
+# Fetch and load HTML into BeautifulSoup
 def lookup(site_id, site_path):
     if not os.path.isdir(const.CACHED_SITES_DIR):
         os.mkdir(const.CACHED_SITES_DIR)

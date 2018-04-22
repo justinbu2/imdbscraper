@@ -1,5 +1,4 @@
 from . import util
-from .constants import SAMPLE_OUTPUT_DIR
 
 
 # Given a soup

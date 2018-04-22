@@ -21,7 +21,7 @@ def get_mutual_movies(cast_data):
     # Parallelizable tasks:
     # 1. making the request to fetch the data from FS or HTTP
     # 2. parsing the data and extracting the actors from those movies
-    pool = mp.Pool(processes=4)
+    pool = mp.Pool(processes=constants.NUM_PROCESSES)
     mutual_movies = collections.defaultdict(dict)
     cast_movies = pool.map(movies.get_movies, cast_data) # list of all movies each cast has been in
     for actor_data, actor_movies in zip(cast_data, cast_movies):
