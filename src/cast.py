@@ -14,6 +14,8 @@ def get_cast(title_id):
         actor_info = {}
         actor_itemprop = actor.find("td", class_="itemprop")
         actor_itemprop_child = actor.find("a", href=True)
+        if not actor_itemprop_child:
+            continue
         actor_info["site_path"] = actor_itemprop_child['href']
         actor_info["id"] = extract_actor_id(actor_info["site_path"])
         actor_info["name"] = actor_itemprop.span.text.strip()
