@@ -1,12 +1,12 @@
 from . import util
 
 
-# Given a soup
+# Return a list of
+# {id: actor_id, name: "First Last", characters: ["names"], site_path: "path/to/rsc"}
 def get_cast(title_id):
     print(f"Getting cast info for IMDB title id {title_id}...")
     soup = util.lookup(title_id, f"/title/{title_id}/fullcredits")
 
-    # plan to return list of {name: NAME, character: NAME, page: LINK} dicts
     cast = []
     cast_tag = soup.find("table", "cast_list") # type bs4.element.Tag
     actors = cast_tag.find_all("tr", ["odd", "even"])

@@ -47,6 +47,7 @@ def marshall_mutual_movies(mutual_movies, title_id):
     output_movies = sorted(output_movies, key=lambda x: -len(x["mutual_actors"]))
     return output_movies
 
+
 def main():
     args = parse_arguments()
     if args.title:
