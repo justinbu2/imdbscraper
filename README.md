@@ -1,5 +1,5 @@
 # imdbscraper
-Generic scraper that takes in the IMDB ID of a movie and writes to a JSON file all features that involve two or more of the same cast members of the given IMDB ID.
+Generic scraper that takes in the IMDB ID of a movie and writes to a JSON file all movies that involve two or more of the same cast members of the given IMDB ID.
 
 
 # Usage
@@ -15,8 +15,10 @@ Output will be in `output/`. Files created there will have a filename of the for
 
 
 # Implementation details
-A folder named `cached-sites` will be created upon invoking the script. This will contain a cache of features and actor HTMLs that have already been visited, so we wouldn't need to bomboard IMDB with requests.
+A folder named `cached-sites` will be created upon invoking the script. This will contain a cache of movies and actor HTMLs that have already been visited, so we wouldn't need to bomboard IMDB with requests.
 
-If a feature does not exist in `cached-sites`, the scraper would fetch the HTML using the `requests` library.
+If a movie does not exist in `cached-sites`, the scraper would fetch the HTML using the `requests` library. The HTML would then be parsed using the `bs4` library.
 
-The HTML would then be parsed using the `bs4` library.
+This web scraper implements multiprocessing. The parameter can be tuned in the `src/constants.py` file. The only section of the code that is parallelized is that which fetches all the movies for every cast member in the input movie. From my testing, a ~9x speedup over the single-threaded program was observed when HTMLs were fetched from the web, and a 3-4x speedup was observed when all the needed HTMLs were already cached on the file system.
+
+The default configuration specifies 4 parallel processes, but the optimal number depends on several parameters, such as your machine's architecture, web connectivity/bandwidth, the average number of movies in which the actors of your input movie acted, and whether the HTML pages of interest are cached.

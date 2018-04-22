@@ -1,5 +1,4 @@
 from . import util
-from .constants import SAMPLE_OUTPUT_DIR
 
 
 # Given a soup
@@ -25,7 +24,6 @@ def get_cast(title_id):
             characters.append(aux_character)
         actor_info["characters"] = characters
         cast.append(actor_info)
-    print(f"Successfully fetched all actors for IMDB title id {title_id}.")
     return cast
 
 
