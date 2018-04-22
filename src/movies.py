@@ -1,7 +1,7 @@
 from . import util
 
 
-# Given an actor, fetch all the movies that the actor was in.
+# Given an actor, fetch info for all the movies that actor was in.
 def get_movies(actor_data):
     print(f"Fetching movies for {actor_data['name']}...")
     site_path = actor_data["site_path"]
