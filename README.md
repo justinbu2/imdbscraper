@@ -1,5 +1,5 @@
 # imdbscraper
-Generic scraper that takes in the IMDB ID of a movie and writes to a JSON file all features that involve two or more of the same cast members of the given IMDB ID.
+Generic scraper that takes in the IMDB ID of a movie and writes to a JSON file all movies that involve two or more of the same cast members of the given IMDB ID.
 
 
 # Usage
@@ -15,8 +15,8 @@ Output will be in `output/`. Files created there will have a filename of the for
 
 
 # Implementation details
-A folder named `cached-sites` will be created upon invoking the script. This will contain a cache of features and actor HTMLs that have already been visited, so we wouldn't need to bomboard IMDB with requests.
+A folder named `cached-sites` will be created upon invoking the script. This will contain a cache of movies and actor HTMLs that have already been visited, so we wouldn't need to bomboard IMDB with requests.
 
-If a feature does not exist in `cached-sites`, the scraper would fetch the HTML using the `requests` library.
+If a movie does not exist in `cached-sites`, the scraper would fetch the HTML using the `requests` library.
 
 The HTML would then be parsed using the `bs4` library.
