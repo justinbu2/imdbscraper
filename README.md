@@ -17,6 +17,6 @@ Output will be in `output/`. Files created there will have a filename of the for
 # Implementation details
 A folder named `cached-sites` will be created upon invoking the script. This will contain a cache of movies and actor HTMLs that have already been visited, so we wouldn't need to bomboard IMDB with requests.
 
-If a movie does not exist in `cached-sites`, the scraper would fetch the HTML using the `requests` library.
+If a movie does not exist in `cached-sites`, the scraper would fetch the HTML using the `requests` library. The HTML would then be parsed using the `bs4` library.
 
-The HTML would then be parsed using the `bs4` library.
+This web scraper implements multiprocessing. The parameter can be tuned in the `src/constants.py` file. The only section of the code that is parallelized is that which fetches all the movies for every cast member in the input movie. From my testing, a 3-4x speedup was observed with caching. The default is to use 4 parallel processes, but the optimal number may vary based on your computer's architecture.
